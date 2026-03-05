@@ -7,7 +7,7 @@ const CashflowSection = React.forwardRef<HTMLDivElement>((props, ref) => {
     <div
       ref={ref}
       style={{
-        position: 'fixed',
+        position: 'absolute',
         top: 0,
         left: 0,
         width: '100vw',
@@ -16,8 +16,6 @@ const CashflowSection = React.forwardRef<HTMLDivElement>((props, ref) => {
         overflowY: 'auto',
         transform: 'translateX(100vw)',
         zIndex: 30,
-        visibility: 'visible',
-        pointerEvents: 'auto',
       }}
     >
       {/* Editorial document card */}
