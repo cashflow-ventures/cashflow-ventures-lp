@@ -24,7 +24,7 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
     fontSize: '36px',
     fontStyle: 'italic',
     fontWeight: 600,
-    lineHeight: 1.3,
+    lineHeight: 1.5,
   }
 
   useLayoutEffect(() => {
@@ -179,7 +179,7 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
               width: '48px',
               height: '2px',
               background: '#C9A84C',
-              opacity: 0.2,
+              opacity: 0.4,
               marginBottom: '48px',
             }}
           />
@@ -200,7 +200,7 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
               marginBottom: '16px',
               color: '#C9A84C',
               fontWeight: 700,
-              opacity: 0.2,
+              opacity: 0.27,
             }}
           >
             79% of new millionaires built their wealth from scratch.¹
@@ -213,9 +213,10 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
               width: '800px',
               fontFamily: 'var(--font-dm-sans), system-ui, sans-serif',
               fontSize: '13px',
-              color: 'rgba(255,255,255,0.4)',
-              opacity: 0.2,
+              color: '#FFFFFF',
+              opacity: 0.1,
               marginBottom: '48px',
+              letterSpacing: '1px',
             }}
           >
             ¹ Northwestern Mutual. (2025). Planning &amp; progress study.
@@ -228,7 +229,7 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
               width: '48px',
               height: '2px',
               background: '#C9A84C',
-              opacity: 0.2,
+              opacity: 0.4,
               marginBottom: '48px',
             }}
           />
