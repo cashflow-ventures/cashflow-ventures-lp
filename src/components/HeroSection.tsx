@@ -14,6 +14,7 @@ const HeroSection = React.forwardRef<HTMLElement>((props, ref) => {
         height: '100vh',
         overflow: 'hidden',
         background: '#0D0D1F',
+        zIndex: 10,
       }}
     >
       {/* Background image */}

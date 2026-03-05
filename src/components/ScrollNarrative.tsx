@@ -90,6 +90,7 @@ export default function ScrollNarrative({ heroRef, cashflowRef }: ScrollNarrativ
           height: '100vh',
           overflow: 'hidden',
           background: '#0D0D1F',
+          zIndex: 20,
         }}
       >
         {/* Narrative text block — starts off-screen left, animated to x:140px */}
