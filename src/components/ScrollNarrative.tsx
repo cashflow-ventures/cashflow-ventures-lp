@@ -92,7 +92,7 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
         pin: stickyRef.current,
         scrub: 1.5,
         animation: tl,
-        markers: false, // Set to true for debugging
+        markers: true, // Enable markers for debugging
         onUpdate: (self) => {
           console.log('ScrollTrigger progress:', self.progress)
         }
@@ -135,6 +135,7 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
             left: 0,
             transform: 'translateY(-50%)',
             width: '800px',
+            zIndex: 25,
           }}
         >
           {/* Line 0: Alexander the Great */}
