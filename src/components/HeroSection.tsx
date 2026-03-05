@@ -9,7 +9,9 @@ const HeroSection = React.forwardRef<HTMLElement>((props, ref) => {
       ref={ref}
       id="hero-section"
       style={{
-        position: 'relative',
+        position: 'absolute',
+        top: 0,
+        left: 0,
         width: '100vw',
         height: '100vh',
         overflow: 'hidden',

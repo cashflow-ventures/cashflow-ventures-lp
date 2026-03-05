@@ -9,9 +9,10 @@ gsap.registerPlugin(ScrollTrigger)
 interface ScrollNarrativeProps {
   heroRef: React.RefObject<HTMLElement | null>
   cashflowRef: React.RefObject<HTMLDivElement | null>
+  children: React.ReactNode
 }
 
-export default function ScrollNarrative({ heroRef, cashflowRef }: ScrollNarrativeProps) {
+export default function ScrollNarrative({ heroRef, cashflowRef, children }: ScrollNarrativeProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const stickyRef = useRef<HTMLDivElement>(null)
   const narrativeRef = useRef<HTMLDivElement>(null)
@@ -93,6 +94,9 @@ export default function ScrollNarrative({ heroRef, cashflowRef }: ScrollNarrativ
           zIndex: 20,
         }}
       >
+        {/* Hero section rendered inside the pinned area */}
+        {children}
+        
         {/* Narrative text block — starts off-screen left, animated to x:140px */}
         <div
           ref={narrativeRef}
