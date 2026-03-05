@@ -34,7 +34,7 @@ const HeroSection = React.forwardRef<HTMLElement>((props, ref) => {
           position: 'absolute',
           inset: 0,
           background:
-            'radial-gradient(ellipse 120% 120% at 50% 45%, rgba(0,0,0,0) 20%, rgba(13,13,31,0.8) 70%, #0D0D1F 100%)',
+            'radial-gradient(ellipse 60% 60% at 50% 45%, rgba(0,0,0,0) 0%, rgba(13,13,31,0.8) 58%, #0D0D1F 83%)',
         }}
       />
 
