@@ -73,6 +73,8 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
           onStart: () => console.log('Cashflow animation started!'),
           onComplete: () => console.log('Cashflow animation completed!')
         })
+        // Simultaneously slide narrative out to the left
+        tl.to(narrativeRef.current, { x: '-100vw', duration: 2, ease: 'none' }, '<')
       } else {
         console.error('Cannot add cashflow animation - ref is null')
       }
