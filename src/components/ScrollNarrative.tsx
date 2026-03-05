@@ -28,16 +28,27 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
   }
 
   useLayoutEffect(() => {
+    console.log('ScrollNarrative mounted')
+    console.log('heroRef.current:', heroRef.current)
+    console.log('cashflowRef.current:', cashflowRef.current)
+    
     const ctx = gsap.context(() => {
       // Set initial state
       gsap.set(narrativeRef.current, { x: '-100vw' })
       gsap.set(lineRefs.current.filter(Boolean), { opacity: 0.2 })
 
       if (cashflowRef.current) {
+        console.log('Setting cashflowRef initial position to x: 100vw')
         gsap.set(cashflowRef.current, { x: '100vw' })
+      } else {
+        console.error('cashflowRef.current is null!')
       }
 
-      const tl = gsap.timeline()
+      const tl = gsap.timeline({
+        onUpdate: () => {
+          console.log('Timeline progress:', tl.progress())
+        }
+      })
 
       // Phase A: Hero exits right, narrative enters from left — simultaneously (duration: 1)
       if (heroRef.current) {
@@ -54,8 +65,19 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
 
       // Phase C: Cashflow slides in from right to left (duration: 2)
       if (cashflowRef.current) {
-        tl.to(cashflowRef.current, { x: 0, duration: 2, ease: 'none' })
+        console.log('Adding cashflow animation to timeline')
+        tl.to(cashflowRef.current, { 
+          x: 0, 
+          duration: 2, 
+          ease: 'none',
+          onStart: () => console.log('Cashflow animation started!'),
+          onComplete: () => console.log('Cashflow animation completed!')
+        })
+      } else {
+        console.error('Cannot add cashflow animation - ref is null')
       }
+
+      console.log('Timeline total duration:', tl.duration())
 
       // Total timeline duration: 1 + 4.5 + 2 = 7.5 units
       // With scrub: 1.5, this needs sufficient scroll distance
@@ -64,11 +86,14 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
       ScrollTrigger.create({
         trigger: containerRef.current,
         start: 'top top',
-        end: `+=${containerRef.current?.offsetHeight ?? 10000}`,
+        end: `+=${containerRef.current?.offsetHeight ?? 15000}`,
         pin: stickyRef.current,
         scrub: 1.5,
         animation: tl,
         markers: false, // Set to true for debugging
+        onUpdate: (self) => {
+          console.log('ScrollTrigger progress:', self.progress)
+        }
       })
     }, containerRef)
 
@@ -96,7 +121,7 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
           zIndex: 20,
         }}
       >
-        {/* Hero section rendered inside the pinned area */}
+        {/* Hero and Cashflow sections rendered inside the pinned area */}
         {children}
         
         {/* Narrative text block — starts off-screen left, animated to x:140px */}

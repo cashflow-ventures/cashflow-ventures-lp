@@ -13,8 +13,8 @@ export default function Home() {
     <main style={{ position: 'relative' }}>
       <ScrollNarrative heroRef={heroRef} cashflowRef={cashflowRef}>
         <HeroSection ref={heroRef} />
+        <CashflowSection ref={cashflowRef} />
       </ScrollNarrative>
-      <CashflowSection ref={cashflowRef} />
     </main>
   )
 }
