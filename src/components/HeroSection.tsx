@@ -26,7 +26,7 @@ const HeroSection = React.forwardRef<HTMLElement>((props, ref) => {
         />
         <img
           src="/images/dark-overlay@1x.webp"
-          alt=""
+          alt="Cashflow Ventures Hero - First, Construct the Citadel, Then, the Gold"
           style={{
             width: '100%',
             height: '100%',
@@ -37,66 +37,6 @@ const HeroSection = React.forwardRef<HTMLElement>((props, ref) => {
           }}
         />
       </picture>
-
-      {/* Headline block - exact match to Pencil design */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          textAlign: 'center',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '16px',
-          zIndex: 1,
-        }}
-      >
-        <p
-          style={{
-            fontFamily: 'Cormorant Garamond, Georgia, serif',
-            fontSize: '88px',
-            fontStyle: 'italic',
-            fontWeight: '600',
-            letterSpacing: '-2px',
-            lineHeight: 1,
-            color: '#FFFFFF',
-            margin: 0,
-          }}
-        >
-          First, Construct
-        </p>
-        <p
-          style={{
-            fontFamily: 'Cormorant Garamond, Georgia, serif',
-            fontSize: '88px',
-            fontStyle: 'italic',
-            fontWeight: '600',
-            letterSpacing: '-2px',
-            lineHeight: 1,
-            color: '#C9A84C',
-            margin: 0,
-          }}
-        >
-          the Citadel
-        </p>
-        <p
-          style={{
-            fontFamily: 'Cormorant Garamond, Georgia, serif',
-            fontSize: '88px',
-            fontStyle: 'italic',
-            fontWeight: '600',
-            letterSpacing: '-2px',
-            lineHeight: 1,
-            color: '#FFFFFF',
-            margin: 0,
-          }}
-        >
-          Then, the Gold
-        </p>
-      </div>
     </section>
   )
 })
