@@ -28,17 +28,17 @@ const HeroSection = React.forwardRef<HTMLElement>((props, ref) => {
         style={{ objectFit: 'cover', opacity: 0.35 }}
       />
 
-      {/* Radial gradient overlay */}
+      {/* Radial gradient overlay - matches Pencil design exactly */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
           background:
-            'radial-gradient(ellipse at 50% 45%, transparent 0%, #0D0D1FCC 55%, #0D0D1F 100%)',
+            'radial-gradient(ellipse 120% 120% at 50% 45%, transparent 20%, #0D0D1FCC 70%, #0D0D1F 100%)',
         }}
       />
 
-      {/* Headline block */}
+      {/* Headline block - exact match to Pencil design */}
       <div
         style={{
           position: 'absolute',
@@ -48,44 +48,49 @@ const HeroSection = React.forwardRef<HTMLElement>((props, ref) => {
           textAlign: 'center',
           display: 'flex',
           flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
           gap: '16px',
         }}
       >
         <p
           style={{
-            fontFamily: 'var(--font-cormorant), Georgia, serif',
+            fontFamily: 'Cormorant Garamond, Georgia, serif',
             fontSize: '88px',
             fontStyle: 'italic',
-            fontWeight: 600,
+            fontWeight: '600',
             letterSpacing: '-2px',
             lineHeight: 1,
             color: '#FFFFFF',
+            margin: 0,
           }}
         >
           First, Construct
         </p>
         <p
           style={{
-            fontFamily: 'var(--font-cormorant), Georgia, serif',
+            fontFamily: 'Cormorant Garamond, Georgia, serif',
             fontSize: '88px',
             fontStyle: 'italic',
-            fontWeight: 600,
+            fontWeight: '600',
             letterSpacing: '-2px',
             lineHeight: 1,
             color: '#C9A84C',
+            margin: 0,
           }}
         >
           the Citadel
         </p>
         <p
           style={{
-            fontFamily: 'var(--font-cormorant), Georgia, serif',
+            fontFamily: 'Cormorant Garamond, Georgia, serif',
             fontSize: '88px',
             fontStyle: 'italic',
-            fontWeight: 600,
+            fontWeight: '600',
             letterSpacing: '-2px',
             lineHeight: 1,
             color: '#FFFFFF',
+            margin: 0,
           }}
         >
           Then, the Gold
