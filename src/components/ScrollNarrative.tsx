@@ -66,12 +66,22 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
       // Phase C: Cashflow slides in from right to left (duration: 2)
       if (cashflowRef.current) {
         console.log('Adding cashflow animation to timeline')
+        console.log('Cashflow initial x:', gsap.getProperty(cashflowRef.current, 'x'))
         tl.to(cashflowRef.current, { 
           x: 0, 
           duration: 2, 
           ease: 'none',
-          onStart: () => console.log('Cashflow animation started!'),
-          onComplete: () => console.log('Cashflow animation completed!')
+          onStart: () => {
+            console.log('Cashflow animation started!')
+            console.log('Cashflow x at start:', gsap.getProperty(cashflowRef.current, 'x'))
+          },
+          onUpdate: () => {
+            console.log('Cashflow x during animation:', gsap.getProperty(cashflowRef.current, 'x'))
+          },
+          onComplete: () => {
+            console.log('Cashflow animation completed!')
+            console.log('Cashflow final x:', gsap.getProperty(cashflowRef.current, 'x'))
+          }
         })
         // Simultaneously slide narrative out to the left
         tl.to(narrativeRef.current, { x: '-100vw', duration: 2, ease: 'none' }, '<')
