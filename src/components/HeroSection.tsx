@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import Image from 'next/image'
 
 const HeroSection = React.forwardRef<HTMLElement>((props, ref) => {
   return (
@@ -19,24 +18,25 @@ const HeroSection = React.forwardRef<HTMLElement>((props, ref) => {
         zIndex: 10,
       }}
     >
-      {/* Background image */}
-      <Image
-        src="/images/Hands Background.webp"
-        alt=""
-        fill
-        priority
-        style={{ objectFit: 'cover', opacity: 0.35 }}
-      />
-
-      {/* Radial gradient overlay - using actual image for pixel-perfect match */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background:
-            'radial-gradient(ellipse 50% 50% at 50% 45%, rgba(13,13,31,0) 0%, rgba(13,13,31,0.5) 40%, rgba(13,13,31,0.9) 70%, #0D0D1F 100%)',
-        }}
-      />
+      {/* Full hero background with responsive images for all screen densities */}
+      <picture>
+        <source
+          srcSet="/images/dark-overlay@1x.webp 1x, /images/dark-overlay@2x.webp 2x, /images/dark-overlay@3x.webp 3x"
+          type="image/webp"
+        />
+        <img
+          src="/images/dark-overlay@1x.webp"
+          alt=""
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+          }}
+        />
+      </picture>
 
       {/* Headline block - exact match to Pencil design */}
       <div
@@ -51,6 +51,7 @@ const HeroSection = React.forwardRef<HTMLElement>((props, ref) => {
           alignItems: 'center',
           justifyContent: 'center',
           gap: '16px',
+          zIndex: 1,
         }}
       >
         <p
