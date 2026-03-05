@@ -39,23 +39,26 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
 
       const tl = gsap.timeline()
 
-      // Phase A: Hero exits right, narrative enters from left — simultaneously
+      // Phase A: Hero exits right, narrative enters from left — simultaneously (duration: 1)
       if (heroRef.current) {
         tl.to(heroRef.current, { x: '110vw', duration: 1, ease: 'none' })
       }
       tl.to(narrativeRef.current, { x: '140px', duration: 1, ease: 'none' }, '<')
 
-      // Phase B: Highlight lines one by one (top to bottom)
+      // Phase B: Highlight lines one by one (duration: 0.5 each = 4.5 total for 9 lines)
       lineRefs.current.forEach((el) => {
         if (el) {
           tl.to(el, { opacity: 1, duration: 0.5, ease: 'none' })
         }
       })
 
-      // Phase C: Cashflow slides in from right to left
+      // Phase C: Cashflow slides in from right to left (duration: 2)
       if (cashflowRef.current) {
-        tl.to(cashflowRef.current, { x: 0, duration: 1.5, ease: 'none' })
+        tl.to(cashflowRef.current, { x: 0, duration: 2, ease: 'none' })
       }
+
+      // Total timeline duration: 1 + 4.5 + 2 = 7.5 units
+      // With scrub: 1.5, this needs sufficient scroll distance
 
       // Pin the sticky layer for the full timeline duration
       ScrollTrigger.create({
@@ -65,6 +68,7 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
         pin: stickyRef.current,
         scrub: 1.5,
         animation: tl,
+        markers: false, // Set to true for debugging
       })
     }, containerRef)
 
@@ -76,7 +80,7 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
       ref={containerRef}
       style={{
         position: 'relative',
-        height: '10000px',
+        height: '15000px',
       }}
     >
       {/* Sticky viewport layer — only 100vh visible at any moment */}
