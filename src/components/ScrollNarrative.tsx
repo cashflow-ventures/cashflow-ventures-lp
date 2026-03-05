@@ -19,8 +19,6 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
   const lineRefs = useRef<(HTMLElement | null)[]>([])
 
   const cormorantStyle: React.CSSProperties = {
-    position: 'absolute',
-    left: 0,
     width: '800px',
     fontFamily: 'var(--font-cormorant), Georgia, serif',
     fontSize: '36px',
@@ -102,16 +100,16 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
           ref={narrativeRef}
           style={{
             position: 'absolute',
-            top: 0,
+            top: '50%',
             left: 0,
+            transform: 'translateY(-50%)',
             width: '800px',
-            height: '100%',
           }}
         >
           {/* Line 0: Alexander the Great */}
           <p
             ref={(el) => { lineRefs.current[0] = el }}
-            style={{ ...cormorantStyle, top: 200, color: '#FFFFFF', opacity: 0.2 }}
+            style={{ ...cormorantStyle, marginBottom: '32px', color: '#FFFFFF', opacity: 0.2 }}
           >
             Alexander the Great inherited the world&apos;s most powerful army from his father at 20;
           </p>
@@ -119,7 +117,7 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
           {/* Line 1: Elon Musk */}
           <p
             ref={(el) => { lineRefs.current[1] = el }}
-            style={{ ...cormorantStyle, top: 380, color: '#FFFFFF', opacity: 0.2 }}
+            style={{ ...cormorantStyle, marginBottom: '32px', color: '#FFFFFF', opacity: 0.2 }}
           >
             Elon Musk received $28 million from his father before starting his first venture at 24;
           </p>
@@ -127,7 +125,7 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
           {/* Line 2: Donald Trump */}
           <p
             ref={(el) => { lineRefs.current[2] = el }}
-            style={{ ...cormorantStyle, top: 560, color: '#FFFFFF', opacity: 0.2 }}
+            style={{ ...cormorantStyle, marginBottom: '48px', color: '#FFFFFF', opacity: 0.2 }}
           >
             Donald Trump received over $400 million from his father before taking over his empire at 25.
           </p>
@@ -136,20 +134,18 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
           <div
             ref={(el) => { lineRefs.current[3] = el as HTMLElement | null }}
             style={{
-              position: 'absolute',
-              top: 760,
-              left: 0,
               width: '48px',
               height: '2px',
               background: '#C9A84C',
               opacity: 0.2,
+              marginBottom: '48px',
             }}
           />
 
           {/* Line 4: Today line */}
           <p
             ref={(el) => { lineRefs.current[4] = el }}
-            style={{ ...cormorantStyle, top: 860, color: '#FFFFFF', opacity: 0.2 }}
+            style={{ ...cormorantStyle, marginBottom: '32px', color: '#FFFFFF', opacity: 0.2 }}
           >
             Today, there is a shift in the world.
           </p>
@@ -159,7 +155,7 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
             ref={(el) => { lineRefs.current[5] = el }}
             style={{
               ...cormorantStyle,
-              top: 990,
+              marginBottom: '16px',
               color: '#C9A84C',
               fontWeight: 700,
               opacity: 0.2,
@@ -172,14 +168,12 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
           <p
             ref={(el) => { lineRefs.current[6] = el }}
             style={{
-              position: 'absolute',
-              top: 1100,
-              left: 0,
               width: '800px',
               fontFamily: 'var(--font-dm-sans), system-ui, sans-serif',
               fontSize: '13px',
               color: 'rgba(255,255,255,0.4)',
               opacity: 0.2,
+              marginBottom: '48px',
             }}
           >
             ¹ Northwestern Mutual. (2025). Planning &amp; progress study.
@@ -189,20 +183,18 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
           <div
             ref={(el) => { lineRefs.current[7] = el as HTMLElement | null }}
             style={{
-              position: 'absolute',
-              top: 1200,
-              left: 0,
               width: '48px',
               height: '2px',
               background: '#C9A84C',
               opacity: 0.2,
+              marginBottom: '48px',
             }}
           />
 
           {/* Line 8: Cashflow mission line */}
           <p
             ref={(el) => { lineRefs.current[8] = el }}
-            style={{ ...cormorantStyle, top: 1300, color: '#FFFFFF', opacity: 0.2 }}
+            style={{ ...cormorantStyle, color: '#FFFFFF', opacity: 0.2 }}
           >
             @Cashflow supports this trend by democratizing value creation on a international level.
           </p>

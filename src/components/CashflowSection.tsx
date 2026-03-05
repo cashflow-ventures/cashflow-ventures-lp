@@ -16,6 +16,8 @@ const CashflowSection = React.forwardRef<HTMLDivElement>((props, ref) => {
         overflowY: 'auto',
         transform: 'translateX(100vw)',
         zIndex: 30,
+        visibility: 'visible',
+        pointerEvents: 'auto',
       }}
     >
       {/* Editorial document card */}
