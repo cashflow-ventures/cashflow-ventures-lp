@@ -28,14 +28,14 @@ const HeroSection = React.forwardRef<HTMLElement>((props, ref) => {
         style={{ objectFit: 'cover', opacity: 0.35 }}
       />
 
-      {/* Radial gradient overlay - matches Pencil design exactly */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background:
-            'radial-gradient(ellipse 70% 70% at 50% 45%, transparent 0%, transparent 16%, rgba(13,13,31,0.8) 58%, #0D0D1F 83%)',
-        }}
+      {/* Radial gradient overlay - using actual image for pixel-perfect match */}
+      <Image
+        src="/images/dark-overlay.webp"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        style={{ objectFit: 'cover', pointerEvents: 'none' }}
       />
 
       {/* Headline block - exact match to Pencil design */}
