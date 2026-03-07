@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 import {
   Lock,
@@ -25,6 +25,10 @@ const CashflowSection = React.forwardRef<HTMLDivElement>((props, ref) => {
   const [errorMessage, setErrorMessage] = useState('')
   const { executeRecaptcha } = useGoogleReCaptcha()
 
+  useEffect(() => {
+    console.log('executeRecaptcha available:', !!executeRecaptcha)
+  }, [executeRecaptcha])
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
@@ -39,10 +43,13 @@ const CashflowSection = React.forwardRef<HTMLDivElement>((props, ref) => {
     try {
       // Get reCAPTCHA token
       if (!executeRecaptcha) {
-        throw new Error('reCAPTCHA not loaded')
+        console.error('executeRecaptcha is not available')
+        throw new Error('reCAPTCHA not loaded. Please refresh the page and try again.')
       }
 
       const recaptchaToken = await executeRecaptcha('submit_form')
+      console.log('reCAPTCHA token generated:', !!recaptchaToken)
+      
       if (!recaptchaToken) {
         throw new Error('Failed to verify reCAPTCHA')
       }

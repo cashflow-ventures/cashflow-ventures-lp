@@ -10,9 +10,17 @@ export default function Home() {
   const heroRef = useRef<HTMLElement>(null)
   const cashflowRef = useRef<HTMLDivElement>(null)
 
+  const recaptchaKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+  
+  console.log('reCAPTCHA site key:', recaptchaKey ? 'loaded' : 'missing')
+
+  if (!recaptchaKey) {
+    console.error('NEXT_PUBLIC_RECAPTCHA_SITE_KEY is not set')
+  }
+
   return (
     <GoogleReCaptchaProvider
-      reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
+      reCaptchaKey={recaptchaKey || ''}
       scriptProps={{
         async: true,
         defer: true,
