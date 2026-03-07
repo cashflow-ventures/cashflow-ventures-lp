@@ -25,10 +25,6 @@ const CashflowSection = React.forwardRef<HTMLDivElement>((props, ref) => {
   const [errorMessage, setErrorMessage] = useState('')
   const { executeRecaptcha } = useGoogleReCaptcha()
 
-  useEffect(() => {
-    console.log('executeRecaptcha available:', !!executeRecaptcha)
-  }, [executeRecaptcha])
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
@@ -43,12 +39,10 @@ const CashflowSection = React.forwardRef<HTMLDivElement>((props, ref) => {
     try {
       // Get reCAPTCHA token
       if (!executeRecaptcha) {
-        console.error('executeRecaptcha is not available')
         throw new Error('reCAPTCHA not loaded. Please refresh the page and try again.')
       }
 
       const recaptchaToken = await executeRecaptcha('submit_form')
-      console.log('reCAPTCHA token generated:', !!recaptchaToken)
       
       if (!recaptchaToken) {
         throw new Error('Failed to verify reCAPTCHA')
@@ -79,7 +73,6 @@ const CashflowSection = React.forwardRef<HTMLDivElement>((props, ref) => {
       // Reset success message after 5 seconds
       setTimeout(() => setSubmitStatus('idle'), 5000)
     } catch (error: any) {
-      console.error('Form submission error:', error)
       setSubmitStatus('error')
       setErrorMessage(error.message || 'Failed to submit form. Please try again.')
     } finally {

@@ -18,8 +18,31 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Cashflow Ventures',
-  description: 'We build, scale, and invest.',
+  title: 'Cashflow Ventures | Build, Scale, Invest',
+  description: 'Cashflow Ventures builds new businesses from the ground up via dedicated partnerships. We build and scale ventures ranging from tech to brick-and-mortar to ecom. We also consult and invest.',
+  keywords: 'venture capital, startup funding, business building, investment, consulting, entrepreneurship, cashflow ventures',
+  authors: [{ name: 'Cashflow Ventures' }],
+  openGraph: {
+    title: 'Cashflow Ventures | Build, Scale, Invest',
+    description: 'We build new businesses from the ground up via dedicated partnerships from around the world.',
+    url: 'https://cashflow.ventures',
+    siteName: 'Cashflow Ventures',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Cashflow Ventures | Build, Scale, Invest',
+    description: 'We build new businesses from the ground up via dedicated partnerships from around the world.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
 }
 

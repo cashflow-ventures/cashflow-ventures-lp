@@ -9,8 +9,6 @@ export async function POST(request: NextRequest) {
   try {
     const { name, link, desc, recaptchaToken } = await request.json()
 
-    console.log('Form submission received:', { name, link, hasToken: !!recaptchaToken })
-
     // Verify reCAPTCHA token server-side
     const recaptchaResponse = await fetch(
       'https://www.google.com/recaptcha/api/siteverify',
@@ -22,12 +20,9 @@ export async function POST(request: NextRequest) {
     )
 
     const recaptchaData = await recaptchaResponse.json()
-    console.log('reCAPTCHA response:', recaptchaData)
 
     // Check if reCAPTCHA verification passed
-    // For v2, just check success. For v3, also check score
     if (!recaptchaData.success) {
-      console.error('reCAPTCHA verification failed:', recaptchaData)
       return NextResponse.json(
         { error: 'reCAPTCHA verification failed. Please try again.' },
         { status: 400 }
@@ -61,7 +56,6 @@ export async function POST(request: NextRequest) {
       .select()
 
     if (error) {
-      console.error('Supabase error:', error)
       return NextResponse.json(
         { error: 'Failed to submit form' },
         { status: 500 }
@@ -70,7 +64,6 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true, data })
   } catch (error) {
-    console.error('Form submission error:', error)
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
