@@ -237,7 +237,7 @@ const CashflowSection = React.forwardRef<HTMLDivElement>((props, ref) => {
       >
         {/* Company description */}
         <div style={{ marginBottom: '0' }}>
-          @C builds new businesses from the ground up via dedicated partnerships from around the
+          cashflow ventures builds new businesses from the ground up via dedicated partnerships from around the
           world and/or connecting brilliant like minded founders. our north star is: always real;
           always hands on; 0 → real value → stable &amp; scalable frameworks.
         </div>

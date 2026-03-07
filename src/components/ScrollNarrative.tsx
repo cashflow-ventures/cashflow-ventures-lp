@@ -200,7 +200,7 @@ export default function ScrollNarrative({ heroRef }: ScrollNarrativeProps) {
             ref={(el) => { lineRefs.current[8] = el }}
             style={{ ...cormorantStyle, color: '#FFFFFF', opacity: 0.2 }}
           >
-            @Cashflow supports this trend by democratizing value creation on a international level.
+            cashflow ventures supports this trend by democratizing value creation on a international level.
           </p>
         </div>
       </div>
