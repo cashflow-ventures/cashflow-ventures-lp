@@ -51,15 +51,15 @@ export default function ScrollNarrative({ heroRef }: ScrollNarrativeProps) {
         }
       })
 
-      // Phase C: Pause for 5 seconds before allowing scroll to continue
-      tl.to({}, { duration: 5, ease: 'none' })
+      // Phase C: Pause for 3 seconds before allowing scroll to continue
+      tl.to({}, { duration: 3, ease: 'none' })
 
-      // Total timeline duration: 1 + 4.5 + 5 = 10.5 units
+      // Total timeline duration: 1 + 4.5 + 3 = 8.5 units
       // Pin the sticky layer for the full timeline duration
       ScrollTrigger.create({
         trigger: containerRef.current,
         start: 'top top',
-        end: `+=${containerRef.current?.offsetHeight ?? 4500}`,
+        end: `+=${containerRef.current?.offsetHeight ?? 3500}`,
         pin: stickyRef.current,
         scrub: 1.5,
         animation: tl,
@@ -74,7 +74,7 @@ export default function ScrollNarrative({ heroRef }: ScrollNarrativeProps) {
       ref={containerRef}
       style={{
         position: 'relative',
-        height: '4500px',
+        height: '3500px',
         zIndex: 20,
       }}
     >
