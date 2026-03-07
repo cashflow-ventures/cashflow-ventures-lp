@@ -20,6 +20,7 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: 'Cashflow Ventures',
   description: 'We build, scale, and invest.',
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
 }
 
 export default function RootLayout({
@@ -29,6 +30,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+      </head>
       <body className={`${cormorant.variable} ${dmSans.variable} font-sans bg-[#0D0D1F] text-white`}>
         {children}
       </body>

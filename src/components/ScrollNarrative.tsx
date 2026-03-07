@@ -3,58 +3,46 @@
 import React, { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import HeroSection from './HeroSection'
 
 gsap.registerPlugin(ScrollTrigger)
 
 interface ScrollNarrativeProps {
   heroRef: React.RefObject<HTMLElement | null>
-  cashflowRef: React.RefObject<HTMLDivElement | null>
-  children: React.ReactNode
 }
 
-export default function ScrollNarrative({ heroRef, cashflowRef, children }: ScrollNarrativeProps) {
+export default function ScrollNarrative({ heroRef }: ScrollNarrativeProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const stickyRef = useRef<HTMLDivElement>(null)
   const narrativeRef = useRef<HTMLDivElement>(null)
   const lineRefs = useRef<(HTMLElement | null)[]>([])
 
   const cormorantStyle: React.CSSProperties = {
-    width: '800px',
+    width: '100%',
     fontFamily: 'var(--font-cormorant), Georgia, serif',
-    fontSize: '36px',
+    fontSize: 'clamp(18px, 4.5vw, 36px)',
     fontStyle: 'italic',
     fontWeight: 600,
     lineHeight: 1.5,
   }
 
   useLayoutEffect(() => {
-    console.log('ScrollNarrative mounted')
-    console.log('heroRef.current:', heroRef.current)
-    console.log('cashflowRef.current:', cashflowRef.current)
-    
     const ctx = gsap.context(() => {
       // Set initial state
       gsap.set(narrativeRef.current, { x: '-100vw' })
       gsap.set(lineRefs.current.filter(Boolean), { opacity: 0.2 })
 
-      if (cashflowRef.current) {
-        console.log('Setting cashflowRef initial position to x: 100vw')
-        gsap.set(cashflowRef.current, { x: '100vw' })
-      } else {
-        console.error('cashflowRef.current is null!')
-      }
+      const tl = gsap.timeline()
 
-      const tl = gsap.timeline({
-        onUpdate: () => {
-          console.log('Timeline progress:', tl.progress())
-        }
-      })
+      // Adjust animation target based on screen size
+      const isMobile = window.innerWidth < 768
+      const narrativeTargetX = isMobile ? '5vw' : '140px'
 
       // Phase A: Hero exits right, narrative enters from left — simultaneously (duration: 1)
       if (heroRef.current) {
         tl.to(heroRef.current, { x: '110vw', duration: 1, ease: 'none' })
       }
-      tl.to(narrativeRef.current, { x: '140px', duration: 1, ease: 'none' }, '<')
+      tl.to(narrativeRef.current, { x: narrativeTargetX, duration: 1, ease: 'none' }, '<')
 
       // Phase B: Highlight lines one by one (duration: 0.5 each = 4.5 total for 9 lines)
       lineRefs.current.forEach((el) => {
@@ -63,61 +51,28 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
         }
       })
 
-      // Phase C: Cashflow slides in from right to left (duration: 2)
-      if (cashflowRef.current) {
-        console.log('Adding cashflow animation to timeline')
-        console.log('Cashflow initial x:', gsap.getProperty(cashflowRef.current, 'x'))
-        tl.to(cashflowRef.current, { 
-          x: 0, 
-          duration: 2, 
-          ease: 'none',
-          onStart: () => {
-            console.log('Cashflow animation started!')
-            console.log('Cashflow x at start:', gsap.getProperty(cashflowRef.current, 'x'))
-          },
-          onUpdate: () => {
-            console.log('Cashflow x during animation:', gsap.getProperty(cashflowRef.current, 'x'))
-          },
-          onComplete: () => {
-            console.log('Cashflow animation completed!')
-            console.log('Cashflow final x:', gsap.getProperty(cashflowRef.current, 'x'))
-          }
-        })
-        // Simultaneously slide narrative out to the left
-        tl.to(narrativeRef.current, { x: '-100vw', duration: 2, ease: 'none' }, '<')
-      } else {
-        console.error('Cannot add cashflow animation - ref is null')
-      }
-
-      console.log('Timeline total duration:', tl.duration())
-
-      // Total timeline duration: 1 + 4.5 + 2 = 7.5 units
-      // With scrub: 1.5, this needs sufficient scroll distance
-
+      // Total timeline duration: 1 + 4.5 = 5.5 units
       // Pin the sticky layer for the full timeline duration
       ScrollTrigger.create({
         trigger: containerRef.current,
         start: 'top top',
-        end: `+=${containerRef.current?.offsetHeight ?? 15000}`,
+        end: `+=${containerRef.current?.offsetHeight ?? 2500}`,
         pin: stickyRef.current,
         scrub: 1.5,
         animation: tl,
-        markers: true, // Enable markers for debugging
-        onUpdate: (self) => {
-          console.log('ScrollTrigger progress:', self.progress)
-        }
       })
     }, containerRef)
 
     return () => ctx.revert()
-  }, [heroRef, cashflowRef])
+  }, [heroRef])
 
   return (
     <div
       ref={containerRef}
       style={{
         position: 'relative',
-        height: '15000px',
+        height: '2500px',
+        zIndex: 20,
       }}
     >
       {/* Sticky viewport layer — only 100vh visible at any moment */}
@@ -130,13 +85,12 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
           height: '100vh',
           overflow: 'hidden',
           background: '#0D0D1F',
-          zIndex: 20,
         }}
       >
-        {/* Hero and Cashflow sections rendered inside the pinned area */}
-        {children}
+        {/* Hero section rendered inside the pinned area */}
+        <HeroSection ref={heroRef} />
         
-        {/* Narrative text block — starts off-screen left, animated to x:140px */}
+        {/* Narrative text block — starts off-screen left, animated to responsive position */}
         <div
           ref={narrativeRef}
           style={{
@@ -144,14 +98,18 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
             top: '50%',
             left: 0,
             transform: 'translateY(-50%)',
-            width: '800px',
+            width: '100%',
+            maxWidth: 'min(800px, 90vw)',
             zIndex: 25,
+            paddingLeft: '20px',
+            paddingRight: '20px',
+            boxSizing: 'border-box',
           }}
         >
           {/* Line 0: Alexander the Great */}
           <p
             ref={(el) => { lineRefs.current[0] = el }}
-            style={{ ...cormorantStyle, marginBottom: '32px', color: '#FFFFFF', opacity: 0.2 }}
+            style={{ ...cormorantStyle, marginBottom: 'clamp(16px, 4vw, 32px)', color: '#FFFFFF', opacity: 0.2 }}
           >
             Alexander the Great inherited the world&apos;s most powerful army from his father at 20;
           </p>
@@ -159,7 +117,7 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
           {/* Line 1: Elon Musk */}
           <p
             ref={(el) => { lineRefs.current[1] = el }}
-            style={{ ...cormorantStyle, marginBottom: '32px', color: '#FFFFFF', opacity: 0.2 }}
+            style={{ ...cormorantStyle, marginBottom: 'clamp(16px, 4vw, 32px)', color: '#FFFFFF', opacity: 0.2 }}
           >
             Elon Musk received $28 million from his father before starting his first venture at 24;
           </p>
@@ -167,7 +125,7 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
           {/* Line 2: Donald Trump */}
           <p
             ref={(el) => { lineRefs.current[2] = el }}
-            style={{ ...cormorantStyle, marginBottom: '48px', color: '#FFFFFF', opacity: 0.2 }}
+            style={{ ...cormorantStyle, marginBottom: 'clamp(24px, 5vw, 48px)', color: '#FFFFFF', opacity: 0.2 }}
           >
             Donald Trump received over $400 million from his father before taking over his empire at 25.
           </p>
@@ -176,18 +134,18 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
           <div
             ref={(el) => { lineRefs.current[3] = el as HTMLElement | null }}
             style={{
-              width: '48px',
+              width: 'clamp(32px, 8vw, 48px)',
               height: '2px',
               background: '#C9A84C',
               opacity: 0.4,
-              marginBottom: '48px',
+              marginBottom: 'clamp(24px, 5vw, 48px)',
             }}
           />
 
           {/* Line 4: Today line */}
           <p
             ref={(el) => { lineRefs.current[4] = el }}
-            style={{ ...cormorantStyle, marginBottom: '32px', color: '#FFFFFF', opacity: 0.2 }}
+            style={{ ...cormorantStyle, marginBottom: 'clamp(16px, 4vw, 32px)', color: '#FFFFFF', opacity: 0.2 }}
           >
             Today, there is a shift in the world.
           </p>
@@ -197,7 +155,7 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
             ref={(el) => { lineRefs.current[5] = el }}
             style={{
               ...cormorantStyle,
-              marginBottom: '16px',
+              marginBottom: 'clamp(8px, 2vw, 16px)',
               color: '#C9A84C',
               fontWeight: 700,
               opacity: 0.27,
@@ -210,12 +168,12 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
           <p
             ref={(el) => { lineRefs.current[6] = el }}
             style={{
-              width: '800px',
+              width: '100%',
               fontFamily: 'var(--font-dm-sans), system-ui, sans-serif',
-              fontSize: '13px',
+              fontSize: 'clamp(10px, 2.2vw, 13px)',
               color: '#FFFFFF',
               opacity: 0.1,
-              marginBottom: '48px',
+              marginBottom: 'clamp(24px, 5vw, 48px)',
               letterSpacing: '1px',
             }}
           >
@@ -226,11 +184,11 @@ export default function ScrollNarrative({ heroRef, cashflowRef, children }: Scro
           <div
             ref={(el) => { lineRefs.current[7] = el as HTMLElement | null }}
             style={{
-              width: '48px',
+              width: 'clamp(32px, 8vw, 48px)',
               height: '2px',
               background: '#C9A84C',
               opacity: 0.4,
-              marginBottom: '48px',
+              marginBottom: 'clamp(24px, 5vw, 48px)',
             }}
           />
 
