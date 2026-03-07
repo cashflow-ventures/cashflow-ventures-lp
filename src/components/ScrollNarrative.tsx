@@ -51,7 +51,10 @@ export default function ScrollNarrative({ heroRef }: ScrollNarrativeProps) {
         }
       })
 
-      // Total timeline duration: 1 + 4.5 = 5.5 units
+      // Phase C: Pause for 2 seconds before allowing scroll to continue
+      tl.to({}, { duration: 2, ease: 'none' })
+
+      // Total timeline duration: 1 + 4.5 + 2 = 7.5 units
       // Pin the sticky layer for the full timeline duration
       ScrollTrigger.create({
         trigger: containerRef.current,
