@@ -18,7 +18,7 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Cashflow Ventures | Build, Scale, Invest',
+  title: 'Cashflow Ventures',
   description: 'Cashflow Ventures builds new businesses from the ground up via dedicated partnerships. We build and scale ventures ranging from tech to brick-and-mortar to ecom. We also consult and invest.',
   keywords: 'venture capital, startup funding, business building, investment, consulting, entrepreneurship, cashflow ventures',
   authors: [{ name: 'Cashflow Ventures' }],
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     apple: '/Logo Screen.png',
   },
   openGraph: {
-    title: 'Cashflow Ventures | Build, Scale, Invest',
+    title: 'Cashflow Ventures',
     description: 'We build new businesses from the ground up via dedicated partnerships from around the world.',
     url: 'https://cashflow.ventures',
     siteName: 'Cashflow Ventures',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Cashflow Ventures | Build, Scale, Invest',
+    title: 'Cashflow Ventures',
     description: 'We build new businesses from the ground up via dedicated partnerships from around the world.',
     images: ['/Logo Screen.png'],
   },
