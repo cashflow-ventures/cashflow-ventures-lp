@@ -22,6 +22,11 @@ export const metadata: Metadata = {
   description: 'Cashflow Ventures builds new businesses from the ground up via dedicated partnerships. We build and scale ventures ranging from tech to brick-and-mortar to ecom. We also consult and invest.',
   keywords: 'venture capital, startup funding, business building, investment, consulting, entrepreneurship, cashflow ventures',
   authors: [{ name: 'Cashflow Ventures' }],
+  icons: {
+    icon: '/Logo Screen.png',
+    shortcut: '/Logo Screen.png',
+    apple: '/Logo Screen.png',
+  },
   openGraph: {
     title: 'Cashflow Ventures | Build, Scale, Invest',
     description: 'We build new businesses from the ground up via dedicated partnerships from around the world.',
@@ -29,11 +34,13 @@ export const metadata: Metadata = {
     siteName: 'Cashflow Ventures',
     locale: 'en_US',
     type: 'website',
+    images: ['/Logo Screen.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Cashflow Ventures | Build, Scale, Invest',
     description: 'We build new businesses from the ground up via dedicated partnerships from around the world.',
+    images: ['/Logo Screen.png'],
   },
   robots: {
     index: true,
