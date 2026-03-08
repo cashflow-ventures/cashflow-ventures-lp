@@ -63,6 +63,18 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        {/* Google Analytics */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XEBJFSSES6"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-XEBJFSSES6');
+            `,
+          }}
+        />
       </head>
       <body className={`${cormorant.variable} ${dmSans.variable} font-sans bg-[#0D0D1F] text-white`}>
         {children}
