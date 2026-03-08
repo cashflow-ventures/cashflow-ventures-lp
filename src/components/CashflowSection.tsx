@@ -428,6 +428,59 @@ const CashflowSection = React.forwardRef<HTMLDivElement>((props, ref) => {
           <div style={{ fontSize: 'clamp(14px, 3.5vw, 16px)', lineHeight: 1.6 }}>&nbsp;</div>
           <div style={{ fontSize: 'clamp(14px, 3.5vw, 16px)', lineHeight: 1.6 }}>&nbsp;</div>
           <div style={{ fontSize: 'clamp(14px, 3.5vw, 16px)', lineHeight: 1.6 }}>&nbsp;</div>
+
+          {/* Credentials Title */}
+          <div
+            style={{
+              fontSize: 'clamp(14px, 3.5vw, 16px)',
+              textAlign: 'left',
+              marginBottom: 'clamp(-30px, -5vw, -50px)',
+              color: '#202124',
+              position: 'relative',
+              zIndex: 1000,
+            }}
+          >
+            credentials:
+          </div>
+
+          {/* RevenueCat Widget */}
+          <div
+            style={{
+              position: 'relative',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: '100%',
+            }}
+          >
+            <div style={{ position: 'relative', width: '100%', maxWidth: '900px' }}>
+              <iframe
+                src="https://verified.revenuecat.com/senior-mongoose4971"
+                style={{
+                  width: '100%',
+                  height: 'clamp(400px, 60vh, 700px)',
+                  border: 'none',
+                  borderRadius: '8px',
+                }}
+                title="RevenueCat Verification"
+              />
+              {/* Overlay to hide username at top */}
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: 'clamp(60px, 10vw, 80px)',
+                  background: '#F8F9FA',
+                  borderTopLeftRadius: '8px',
+                  borderTopRightRadius: '8px',
+                  pointerEvents: 'none',
+                }}
+              />
+            </div>
+          </div>
+
           <div style={{ fontSize: 'clamp(14px, 3.5vw, 16px)', lineHeight: 1.6 }}>&nbsp;</div>
           <div style={{ fontSize: 'clamp(14px, 3.5vw, 16px)', lineHeight: 1.6 }}>&nbsp;</div>
 
